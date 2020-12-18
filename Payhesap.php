@@ -124,6 +124,9 @@ class Payhesap
 				'ip'           => $this->GetIP()
 			];
 
+
+			$encode = json_encode($post, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+			
 			$ch = curl_init();
 			curl_setopt_array($ch, [
 				CURLOPT_URL => "https://www.payhesap.com/api/iframe/pay",
@@ -132,22 +135,13 @@ class Payhesap
 				CURLOPT_SSL_VERIFYHOST => false,
 				CURLOPT_FRESH_CONNECT => true,
 				CURLOPT_TIMEOUT => 30,
-				CURLOPT_POST => true,
-				CURLOPT_POSTFIELDS => $post
-			]);
-
-			/*$encode = json_encode($post, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-			$ch = curl_init('https://www.payhesap.com/api/iframe/pay');
-			curl_setopt_array($ch, [
-				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_CUSTOMREQUEST => "POST",
 				CURLOPT_POSTFIELDS => $encode,
-				CURLOPT_HTTPHEADER, [
+				CURLOPT_HTTPHEADER => [
 					'Content-Type: application/json',
 					'Content-Length: ' . strlen($encode)
 				]
-			]);*/
+			]);
 			$response = @curl_exec($ch);
 
 			if (curl_errno($ch)) {
@@ -167,6 +161,9 @@ class Payhesap
 
 	public function callback()
 	{
+		echo '<pre>';
+		print_r($_REQUEST);
+		echo '</pre>';
 		/*$status         = $this->post('status');
 		$result_message = $this->post('resultMessage');
 		$other_code     = $this->post('otherCode');
