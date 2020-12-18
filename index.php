@@ -7,8 +7,8 @@ $payhesap = new Payhesap();
 $payhesap->set_config([
     'hash'         => '', # Payhesap Hash
     'callback_url' => 'http://127.0.0.1/CallBack.php', # CallBack Url
-    'success_url'  => 'http://127.0.0.1/CallBack.php', # Success Url
-    'fail_url'     => 'http://127.0.0.1/CallBack.php' # Failed Url
+    'success_url'  => 'http://127.0.0.1/Success.php', # Success Url
+    'fail_url'     => 'http://127.0.0.1/Failed.php' # Failed Url
 ]);
 
 $payhesap->set_order_id('1');
